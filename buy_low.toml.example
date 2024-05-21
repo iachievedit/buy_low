@@ -1,0 +1,7 @@
+# buy_low.toml
+
+# Maximum amount (in dollars) to use for trading
+maximum_amount = 1000
+
+# Equities to trade
+equities = ['SCHD', 'DIA', 'QQQ', 'SCHA']
