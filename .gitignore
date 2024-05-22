@@ -1,3 +1,4 @@
 .env
 /target
 buy_low.toml
+/bin

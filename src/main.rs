@@ -27,13 +27,24 @@ struct Equity {
   symbol: String,
   
   #[tabled(rename = "Starting Price")]
+  #[tabled(display_with = "display_dollars")]
   starting_price: f64,
 
   #[tabled(rename = "Ending Price")]
+  #[tabled(display_with = "display_dollars")]
   ending_price:  f64,
 
   #[tabled(rename = "Percent Change")]
+  #[tabled(display_with = "display_percent_change")]
   percent_change: f64
+}
+
+fn display_dollars(dollars: &f64) -> String {
+  format!("${:.2}", dollars)
+}
+
+fn display_percent_change(percent_change: &f64) -> String {
+  format!("{:.2}%", percent_change)
 }
 
 fn find_worst_performance(previous_prices: HashMap<&String, f64>,
@@ -114,7 +125,10 @@ fn main() {
   let max_amount = config.maximum_amount;
   let current_price = current_prices.get(&worst_equity).unwrap();
   let whole_shares = (max_amount / current_price) as u32;
-  println!("Maximum whole shares to purchase: {}", whole_shares);
+
+  println!("Maximum amount to spend: ${}", max_amount);
+  println!("Maximum whole shares of {} to purchase: {}", worst_equity,
+           whole_shares);
 
   if max_amount > cash_balance {
     println!("Insufficient cash balance (${}) to make the purchase.",
@@ -122,7 +136,7 @@ fn main() {
 
     process::exit(-1);
   } else {
-    println!("Cash balance: {}", cash_balance);
+    println!("Current cash balance: ${}", cash_balance);
   }
 
   if args.live {
