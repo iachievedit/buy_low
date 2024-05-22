@@ -57,7 +57,7 @@ fn find_worst_performance(previous_prices: HashMap<&String, f64>,
 
   for (equity, previous_price) in previous_prices {
     let current_price = current_prices.get(equity).unwrap();
-    let performance = (current_price - previous_price) / current_price;
+    let performance = (current_price - previous_price) / previous_price;
 
     //println!("{:>4}:  {:.2}%", equity, performance * 100.0);
 
