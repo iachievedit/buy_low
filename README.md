@@ -50,17 +50,25 @@ Done!
 Running with `--live` and suitable credentials will place an order.
 
 
-# .env File
+# Configuration
+
+`buy_low` is a Schwab API _app_ and requires an app _key_ and _secret_.  You will find these values on your Schwab app's **Details** page.
+
+The refresh token is obtained by a successful OAuth exchange with your _trading account_.   It can be obtained by following the instructions [here](https://www.reddit.com/r/Schwab/comments/1c2ioe1/the_unofficial_guide_to_charles_schwabs_trader/).
+
+Ignore the `POSTGRES_CONN_STRING`, that feature hasn't been fully developed.
+
+## .env File
 
 ```
-SCHWAB_API_KEY=
+SCHWAB_APP_KEY=
 SCHWAB_APP_SECRET=
 SCHWAB_REFRESH_TOKEN=
 # Optional
 POSTGRES_CONN_STRING=
 ```
 
-# buy_low.toml
+## buy_low.toml
 
 What equities are you interested in purchasing? How much are you willing to invest _per invocation_?
 
