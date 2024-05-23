@@ -1,6 +1,11 @@
 > [!WARNING]
 > Not production ready!  Use at your own risk.
 
+> [!WARNING]
+> This application executes a specific trading strategy (buy your losers)
+> that may not be right for you.  I am not a financial advisor, and do not
+> provide personal financial or investing advice.
+
 # buy_low
 
 A tool for making automated equity purchases via the Charles Schwab Trader API.
@@ -13,18 +18,25 @@ A tool for making automated equity purchases via the Charles Schwab Trader API.
 
 # Basic Usage
 
+`buy_low` (in its current form) automates the purchase of the _worst_ 
+performing equity over the _past 30 days_ in its configuration file (`equities`).  
+
+More detail is to be added, but in this example, at the time of the run, `SCHD` had performed "the worst" over the past month compared to the other equities.  Therefore, an order for 12 shares (equal to or less than `maximum_amount`) of `SCHD` would be created.
+
 ```
 Running in test mode, no orders will be placed.
 +--------+----------------+--------------+----------------+
 | Equity | Starting Price | Ending Price | Percent Change |
 +--------+----------------+--------------+----------------+
-| QQQ    | $418.82        | $455.88      | 8.13%          |
+| SCHD   | $77.24         | $79.23       | 2.58%          |
 +--------+----------------+--------------+----------------+
-| SCHA   | $45.95         | $48.72       | 5.69%          |
+| DIA    | $382.37        | $397.20      | 3.88%          |
 +--------+----------------+--------------+----------------+
-| DIA    | $382.37        | $398.03      | 3.93%          |
+| SCHM   | $76.39         | $79.85       | 4.53%          |
 +--------+----------------+--------------+----------------+
-| SCHD   | $77.24         | $79.50       | 2.84%          |
+| SCHA   | $45.95         | $48.45       | 5.44%          |
++--------+----------------+--------------+----------------+
+| QQQ    | $418.82        | $460.35      | 9.92%          |
 +--------+----------------+--------------+----------------+
 Worst performing equity: SCHD
 Maximum amount to spend: $1000

@@ -10,6 +10,7 @@ mod schwab;
 use clap::Parser;
 use serde::Deserialize;
 use std::collections::HashMap;
+use std::cmp::Ordering;
 use std::process;
 
 #[derive(Deserialize)]
@@ -109,11 +110,12 @@ fn main() {
 
   let current_prices = schwab::get_current_price(&config.equities);
 
-  let mut symbols = config.equities.clone();
-  symbols.sort();
+  
 
-  let (worst_equity, equities) = find_worst_performance(previous_prices,
+  let (worst_equity, mut equities) = find_worst_performance(previous_prices,
                                                         &current_prices);
+
+  equities.sort_by(|a, b| a.percent_change.partial_cmp(&b.percent_change).unwrap_or(Ordering::Equal));
 
   let table = Table::new(equities).to_string();
 
