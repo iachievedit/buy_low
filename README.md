@@ -80,3 +80,10 @@ maximum_amount = 1000
 equities = ['SCHD', 'DIA', 'QQQ', 'SCHA']
 ```
 
+# Wish List
+
+Things I'd like to add:
+
+* Saving the order information to Postgres so I visualize transactions later on with a tool like Grafana
+* Perhaps allow for different trading strategies such as "buying the latest winner" or a portfolio rebalancer
+

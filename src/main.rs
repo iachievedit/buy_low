@@ -81,8 +81,13 @@ fn find_worst_performance(previous_prices: HashMap<&String, f64>,
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
+
+    /// Run in live mode and place orders
     #[arg(short, long, action)]
-    live: bool
+    live: bool,
+
+    #[arg(short, long, default_value = "buy_low.toml")]
+    config:  String
 }
 
 
@@ -94,8 +99,11 @@ fn main() {
     println!("Running in test mode, no orders will be placed.");
   }
 
+  let config = args.config;
 
-  let path = std::path::Path::new("buy_low.toml");
+  println!("Using configuration file: {}", config);
+
+  let path = std::path::Path::new(&config);
   let file = std::fs::read_to_string(path).unwrap();
   let config:BuyLowConfig = toml::from_str(&file).unwrap();
 
